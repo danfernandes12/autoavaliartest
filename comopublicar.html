@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo para Publicar no GitHub Pages</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .step-header.active {
+            border-color: #f97316;
+            background-color: #fff7ed;
+            color: #c2410c;
+        }
+        .step-header.active .step-circle {
+            background-color: #f97316;
+            color: white;
+        }
+        .step-content {
+            display: none;
+        }
+        .step-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+
+    <!-- Chosen Palette: Calm Harmony (Light Stone, Dark Stone Text, Orange Accent) -->
+    <!-- Application Structure Plan: The static guide is transformed into an interactive stepper/wizard. This structure chunks the information into manageable steps, guiding the user through the process and reducing cognitive load. A final interactive section allows users to generate their potential site URL. This task-oriented flow is more engaging and user-friendly for instructional content than a long page of text. -->
+    <!-- Visualization & Content Choices: Report Info: 5-step GitHub Pages deployment process. -> Goal: Guide & Inform. -> Viz/Presentation Method: Interactive Stepper (HTML/Tailwind/JS). -> Interaction: Click-based step navigation, highlighted active step, copy-to-clipboard for 'index.html', and a final URL generator. -> Justification: A stepper is a form of process visualization that enhances user engagement and comprehension for instructional content. Traditional charts are not applicable due to the lack of quantitative data. -> Library/Method: Vanilla JS for interactivity. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 md:p-8">
+
+        <header class="text-center mb-10">
+            <h1 class="text-3xl sm:text-4xl font-bold text-stone-900 mb-2">Guia: Como Publicar seu Site HTML no GitHub Pages</h1>
+            <p class="text-lg text-stone-600">O GitHub Pages é um serviço gratuito para hospedar um site estático diretamente de um repositório.</p>
+        </header>
+
+        <main class="bg-white rounded-xl shadow-lg p-6 sm:p-8">
+            <div id="stepper" class="flex flex-col md:flex-row gap-8">
+                <!-- Navegação dos Passos -->
+                <div id="step-navigation" class="w-full md:w-1/3 flex flex-row md:flex-col gap-2">
+                    <button data-step="1" class="step-header flex items-center p-3 rounded-lg border-2 border-transparent text-left w-full transition-all duration-200">
+                        <div class="step-circle w-8 h-8 rounded-full bg-stone-200 text-stone-600 font-bold text-sm flex items-center justify-center mr-3 transition-all duration-200">1</div>
+                        <span class="font-semibold">Conta no GitHub</span>
+                    </button>
+                    <button data-step="2" class="step-header flex items-center p-3 rounded-lg border-2 border-transparent text-left w-full transition-all duration-200">
+                        <div class="step-circle w-8 h-8 rounded-full bg-stone-200 text-stone-600 font-bold text-sm flex items-center justify-center mr-3 transition-all duration-200">2</div>
+                        <span class="font-semibold">Criar Repositório</span>
+                    </button>
+                    <button data-step="3" class="step-header flex items-center p-3 rounded-lg border-2 border-transparent text-left w-full transition-all duration-200">
+                        <div class="step-circle w-8 h-8 rounded-full bg-stone-200 text-stone-600 font-bold text-sm flex items-center justify-center mr-3 transition-all duration-200">3</div>
+                        <span class="font-semibold">Enviar Arquivo</span>
+                    </button>
+                    <button data-step="4" class="step-header flex items-center p-3 rounded-lg border-2 border-transparent text-left w-full transition-all duration-200">
+                        <div class="step-circle w-8 h-8 rounded-full bg-stone-200 text-stone-600 font-bold text-sm flex items-center justify-center mr-3 transition-all duration-200">4</div>
+                        <span class="font-semibold">Ativar Pages</span>
+                    </button>
+                    <button data-step="5" class="step-header flex items-center p-3 rounded-lg border-2 border-transparent text-left w-full transition-all duration-200">
+                        <div class="step-circle w-8 h-8 rounded-full bg-stone-200 text-stone-600 font-bold text-sm flex items-center justify-center mr-3 transition-all duration-200">5</div>
+                        <span class="font-semibold">Acessar Site</span>
+                    </button>
+                </div>
+
+                <!-- Conteúdo dos Passos -->
+                <div id="step-content-container" class="w-full md:w-2/3">
+                    <div data-step="1" class="step-content prose">
+                        <h3>Passo 1: Ter uma Conta no GitHub</h3>
+                        <p>Se você ainda não tem uma conta, precisará criar uma gratuitamente. É o primeiro passo para começar a usar todos os recursos do GitHub, incluindo o Pages.</p>
+                        <a href="https://github.com" target="_blank" class="inline-flex items-center bg-stone-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-stone-900 transition-colors">
+                            Criar conta em github.com
+                            <i data-lucide="arrow-up-right" class="w-4 h-4 ml-2"></i>
+                        </a>
+                    </div>
+                    <div data-step="2" class="step-content prose">
+                        <h3>Passo 2: Criar um Novo Repositório</h3>
+                        <ol>
+                            <li>No canto superior direito, clique em <strong>+</strong> e selecione <strong>"New repository"</strong>.</li>
+                            <li>Dê um nome ao seu repositório (ex: <code>meu-site-onboarding</code>).</li>
+                            <li>Mantenha o repositório como <strong>Público</strong> para usar o Pages gratuitamente.</li>
+                            <li>Clique em <strong>"Create repository"</strong>.</li>
+                        </ol>
+                    </div>
+                    <div data-step="3" class="step-content prose">
+                        <h3>Passo 3: Enviar seu Arquivo HTML</h3>
+                        <p>Agora, adicione seu arquivo HTML ao novo repositório.</p>
+                        <ol>
+                            <li>Clique em <strong>"Add file"</strong> e depois em <strong>"Upload files"</strong>.</li>
+                            <li>Arraste e solte seu arquivo na área indicada.</li>
+                            <li><strong>IMPORTANTE:</strong> O arquivo principal do seu site precisa se chamar <code>index.html</code> para que o GitHub Pages o reconheça automaticamente.</li>
+                        </ol>
+                        <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 mt-4 rounded-md">
+                           <p class="font-bold">Dica!</p>
+                           <p>Após o upload, você pode renomear o arquivo diretamente no GitHub clicando nele e depois no ícone de lápis (editar).</p>
+                        </div>
+                    </div>
+                    <div data-step="4" class="step-content prose">
+                        <h3>Passo 4: Ativar o GitHub Pages</h3>
+                        <ol>
+                            <li>No seu repositório, clique na aba <strong>"Settings"</strong>.</li>
+                            <li>Na barra lateral, clique em <strong>"Pages"</strong>.</li>
+                            <li>Em "Source", selecione o branch de onde publicar (geralmente <code>main</code>).</li>
+                            <li>Deixe a pasta como <code>/root</code> e clique em <strong>"Save"</strong>.</li>
+                        </ol>
+                    </div>
+                    <div data-step="5" class="step-content prose">
+                        <h3>Passo 5: Acessar seu Site</h3>
+                        <p>O GitHub pode levar alguns minutos para publicar seu site. Após a conclusão, um link aparecerá na mesma seção (Settings > Pages).</p>
+                        <p>Seu link terá este formato:</p>
+                        <div class="bg-stone-200 p-3 rounded-md text-center font-mono text-sm break-words">
+                            https://&lt;seu-usuario&gt;.github.io/&lt;repositorio&gt;/
+                        </div>
+                        <div class="mt-6 border-t pt-4">
+                            <h4 class="font-semibold">Simule sua URL:</h4>
+                            <div class="flex flex-col sm:flex-row gap-2 mt-2">
+                                <input id="username" type="text" placeholder="Seu usuário no GitHub" class="flex-grow p-2 border rounded-md">
+                                <input id="repo" type="text" placeholder="Nome do repositório" class="flex-grow p-2 border rounded-md">
+                            </div>
+                            <button id="generate-url" class="mt-2 w-full sm:w-auto bg-orange-500 text-white font-semibold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors">Gerar URL</button>
+                            <p id="result-url" class="mt-3 text-center h-6 text-green-700 font-semibold"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-center mt-10 text-stone-500 text-sm">
+            <p>Pronto! Sua página estará no ar e acessível para qualquer pessoa com o link.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stepHeaders = document.querySelectorAll('.step-header');
+            const stepContents = document.querySelectorAll('.step-content');
+
+            function setActiveStep(stepNumber) {
+                stepHeaders.forEach(header => {
+                    header.classList.toggle('active', header.dataset.step === stepNumber);
+                });
+                stepContents.forEach(content => {
+                    content.classList.toggle('active', content.dataset.step === stepNumber);
+                });
+            }
+
+            stepHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    setActiveStep(header.dataset.step);
+                });
+            });
+
+            // URL Generator Logic
+            const generateBtn = document.getElementById('generate-url');
+            const usernameInput = document.getElementById('username');
+            const repoInput = document.getElementById('repo');
+            const resultUrlP = document.getElementById('result-url');
+
+            generateBtn.addEventListener('click', () => {
+                const username = usernameInput.value.trim();
+                const repo = repoInput.value.trim();
+                if (username && repo) {
+                    const url = `https://${username}.github.io/${repo}/`;
+                    resultUrlP.innerHTML = `<a href="${url}" target="_blank" class="underline hover:text-orange-600">${url}</a>`;
+                } else {
+                    resultUrlP.textContent = 'Por favor, preencha ambos os campos.';
+                }
+            });
+
+            // Initialize Lucide icons and set first step as active
+            lucide.createIcons();
+            setActiveStep('1');
+        });
+    </script>
+
+</body>
+</html>
